@@ -1,0 +1,88 @@
+{
+  "checks": [
+    {
+      "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WinRM\\Client",
+      "name": "AllowBasic",
+      "expected": 0,
+      "stig": "V-253416"
+    },
+    {
+      "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WinRM\\Service",
+      "name": "AllowBasic",
+      "expected": 0,
+      "stig": "V-253418"
+    },
+    {
+      "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer",
+      "name": "AlwaysInstallElevated",
+      "expected": 0,
+      "stig": "V-253411"
+    },
+    {
+      "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+      "name": "NoAutorun",
+      "expected": 1,
+      "stig": "V-253387"
+    },
+    {
+      "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\policies\\Explorer",
+      "name": "NoDriveTypeAutoRun",
+      "expected": 255,
+      "stig": "V-253388"
+    },
+    {
+      "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+      "name": "NoAutoplayfornonVolume",
+      "expected": 1,
+      "stig": "V-253386"
+    },
+    {
+      "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "name": "DisableExceptionChainValidation",
+      "expected": 0,
+      "stig": "V-253284"
+    },
+    {
+      "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "name": "NoLMHash",
+      "expected": 1,
+      "stig": "V-253461"
+    },
+    {
+      "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "name": "LmCompatibilityLevel",
+      "expected": 5,
+      "stig": "V-253462"
+    },
+    {
+      "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "name": "RestrictAnonymousSAM",
+      "expected": 1,
+      "stig": "V-253453"
+    },
+    {
+      "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "name": "RestrictAnonymous",
+      "expected": 1,
+      "stig": "V-253454"
+    },
+    {
+      "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\LanManServer\\Parameters",
+      "name": "RestrictNullSessAccess",
+      "expected": 1,
+      "stig": "V-253456"
+    },
+    {
+      "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services",
+      "name": "fAllowToGetHelp",
+      "expected": 0,
+      "stig": "V-253382"
+    },
+    {
+      "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard",
+      "name": "LsaCfgFlags",
+      "expected": 1,
+      "stig": "V-253370"
+    }
+  ]
+}
