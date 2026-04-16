@@ -48,46 +48,15 @@ def set_reg_value(path, name, value):
     try:
         if isinstance(value, int):
             ps_value = value
-            ps_type = "DWord"
         else:
-            ps_value = value
-            ps_type = "String"
+            ps_value = f'"{value}"'
 
-        cmd = f"""
-        powershell -Command "
-        try {{
-            if (!(Test-Path '{path}')) {{
-                New-Item -Path '{path}' -Force | Out-Null
-            }}
-
-            New-ItemProperty -Path '{path}' -Name '{name}' -Value {ps_value} -PropertyType {ps_type} -Force | Out-Null
-
-            Start-Sleep -Milliseconds 300
-
-            $current = Get-ItemProperty -Path '{path}' -Name '{name}' -ErrorAction SilentlyContinue
-
-            if ($null -eq $current.{name}) {{
-                exit 2
-            }}
-
-            if ($current.{name} -eq {ps_value}) {{
-                exit 0
-            }} else {{
-                exit 3
-            }}
-
-        }} catch {{
-            exit 1
-        }}"
-        """
+        cmd = f'powershell -Command "Set-ItemProperty -Path \'{path}\' -Name \'{name}\' -Value {ps_value}"'
 
         result = subprocess.run(cmd, capture_output=True, text=True, shell=True)
-
-        return result.returncode
-
-    except Exception as e:
-        print(f"Remediation error: {e}")
-        return 1
+        return result.returncode == 0
+    except:
+        return False
 
 # ---------------- CHECK LOGIC ----------------
 def run_checks(json_file, tree, summary_label):
@@ -245,18 +214,10 @@ def remediate_selected(tree, entry, summary_label):
 
         result = set_reg_value(path, name, expected)
 
-        if result == 0:
+        if result == True:
             success += 1
 
-        elif result == 3:
-            failed += 1
-            messagebox.showwarning(
-                "Policy Controlled Setting",
-                f"{name} is being overridden by Local or Domain Group Policy.\n\n"
-                f"Manual GPO change required."
-            )
-
-        elif result == 2:
+        elif result == False:
             failed += 1
             messagebox.showwarning(
                 "Write Failed",
